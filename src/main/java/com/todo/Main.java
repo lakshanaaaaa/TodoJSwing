@@ -13,6 +13,7 @@ import com.todo.util.DatabaseConnection;
 public class Main {
     public static void main(String[] args) {
         DatabaseConnection db_Connection = new DatabaseConnection();
+        //db connection test
         try {
             Connection cn = db_Connection.getDBConnection();
             System.out.println("Connected to the database");
@@ -20,13 +21,13 @@ public class Main {
             System.out.println("Failed to connect to the database " + e.getMessage());
             System.exit(1);
         }
-
+        //UI setup test
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
             System.err.println("Could not set look and feel " + e.getMessage());
         }
-
+        //launch the GUI in the Event Dispatch Thread
         SwingUtilities.invokeLater(() -> {
             try {
                 new TodoAppGUI().setVisible(true);

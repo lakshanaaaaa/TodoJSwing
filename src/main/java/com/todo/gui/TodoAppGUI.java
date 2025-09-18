@@ -28,6 +28,8 @@ public class TodoAppGUI extends JFrame{
         this.todoDAO=new TodoAppDAO();
         initializeComponents();
         setupLayout();
+        setupEventListeners();  
+        loadTodos();  
         
     }
     private void initializeComponents(){
@@ -114,28 +116,41 @@ public class TodoAppGUI extends JFrame{
 
     }
 
-    // private void setupEventListeners(){
-    //     addButton.addActionListener((e)->{addTodo();});
-    //     updateButton.addActionListener((e)->{updateTodo();});
-    //     deleteButton.addActionListener((e)->{deleteTodo();});
-    //     refreshButton.addActionListener((e)->{refreshTodo();});
-        
-    // }
-    // private void addTodo(){
+    private void setupEventListeners(){
+        addButton.addActionListener((e)->{addTodo();});
+        updateButton.addActionListener((e)->{updateTodo();});
+        deleteButton.addActionListener((e)->{deleteTodo();});
+        refreshButton.addActionListener((e)->{refreshTodo();});
+    }
+    private void addTodo(){
 
-    // }
-    // private void deleteTodo(){
+    }
+    private void deleteTodo(){
         
-    // }
-    // private void updateTodo(){
+    }
+    private void updateTodo(){
         
-    // }
-    // private void refreshTodo(){
+    }
+    private void refreshTodo(){
         
-    // }
-    // private void loadTodos(){
+    }
+    private void loadTodos(){
+        try{
+        List<Todo> todos=todoDAO.getAllTodos();
+        updateTable(todos);
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(this, "Error fetching todos", "Error", JOptionPane.ERROR_MESSAGE);
+        }
 
-    // }
+    }
+    private void updateTable(List<Todo> todos){
+        tableModel.setRowCount(0);
+        for(Todo t:todos){
+            Object[] row={t.getId(),t.getTitle(),t.getDescription(),t.isCompleted(),t.getCreated_at(),t.getUpdated_at()};
+             tableModel.addRow(row);
+        }
+    }
 
 
 }
