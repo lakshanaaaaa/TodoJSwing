@@ -12,7 +12,7 @@ import com.todo.util.DatabaseConnection;
 import java.sql.Statement;
 
 public class TodoAppDAO {
-    private static final String SELECT_ALL_TODOS = "SELECT * FROM todos order by created_at ASC";
+    private static final String SELECT_ALL_TODOS = "SELECT * FROM todos order by id ASC";
     private static final String INSERT_TODO="Insert INTO todos(title,description,completed,created_at,updated_at) VALUES(?,?,?,?,?)";
     private static final String SELECT_TODO_BY_ID = "SELECT * FROM todos WHERE id=?";
     private static final String UPDATE_TODO = "UPDATE todos SET title=?, description=?, completed=?, updated_at=? WHERE id=?";
@@ -111,7 +111,7 @@ public class TodoAppDAO {
     {
         List<Todo> todos=new ArrayList<>();
         try(Connection conn=DatabaseConnection.getDBConnection();
-            PreparedStatement stmt=conn.prepareStatement("SELECT * from todos ORDER BY created_at DESC");
+            PreparedStatement stmt=conn.prepareStatement(SELECT_ALL_TODOS);
             ResultSet res=stmt.executeQuery();
         )
         {
